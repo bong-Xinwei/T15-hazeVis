@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HCI - Team 15 Radar Chart</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/fontastic.css">
+    <link rel="stylesheet" href="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+</head>
+<body>
+<nav class="side-navbar" data-toggle="collapse">
+    <div class="main-menu">
+        <ul id="side-main-menu" class="side-menu list-unstyled">
+            <li><a class="navbar-toggle collapsed" data-toggle="collapse" data-target="#example2dropdownDropdown" aria-expanded="false"> <i class="icon-line-chart"></i>Chart Type</a>
+                <ul id="example2dropdownDropdown" class="collapse list-unstyled ">
+                    <li><a href="linechart.html">Line Chart</a></li>
+                    <li><a href="barchart.html">Bar Chart</a></li>
+                    <li><a href="radarchart.html">Radar Chart</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="page">
+    <section class="charts">
+        <div class="container-fluid">
+            <header></header>
+            <div class="row">
+                <div class="col-lg-11">
+                    <canvas id="radarChartExample" height="200%"></canvas>
+                    <script>
+                        $(function() {
+                            var a = [];
+                            var b = [];
+                            var c=[];
+                            var d=[];
+                            var e=[];
+                            var top4conditions = [];
+                            var data = {
+                                resource_id: '19dea782-8fe1-40d0-834d-70f780ca86f1', // the resource id
+                            };
+                            $.ajax({
+                                url: 'https://data.gov.sg/api/action/datastore_search',
+                                data: data,
+                                dataType: 'json',
+                                success: function(data) {
+                                    for(count = 0 ; count < data.result.total; count++){
+                                        console.log(data.result.records[count].condition === "Hyperlipidemia");
+                                        if (data.result.records[count].condition === "Hyperlipidemia") {
+                                            b.push(data.result.records[count].percentage_diagnoses);
+                                            a.push(data.result.records[count].year);
+                                        }
+                                        if (data.result.records[count].condition === "Hypertensive Disease") {
+                                            c.push(data.result.records[count].percentage_diagnoses);
+                                        }
+                                        if (data.result.records[count].condition === "Acute Upper Respiratory Tract Infection including Influenza") {
+                                            d.push(data.result.records[count].percentage_diagnoses);
+                                        }
+                                        if (data.result.records[count].condition === "Diabetes Mellitus") {
+                                            e.push(data.result.records[count].percentage_diagnoses);
+                                        }
+                                    }
+                                }
+                            });
+                            $(document).ready(function () {
+                                'use strict';
+                                var brandPrimary = 'rgba(51, 179, 90, 1)';
+                                var RADARCHARTEXMPLE = $('#radarChartExample');
+                                var radarChartExample = new Chart(RADARCHARTEXMPLE, {
+                                    type: 'radar',
+                                    data: {
+                                        labels:a,
+                                        datasets: [
+                                            {
+                                                label:["Hyperlipidemia"],
+                                                fill: false,
+                                                backgroundColor: "rgba(212,37,37,0.8)",
+                                                borderColor: "rgba(212,37,37,0.8)",
+                                                pointBorderColor: "rgba(212,37,37,0.8)",
+                                                pointBackgroundColor: "rgba(212,37,37,0.8)",
+                                                pointHoverBackgroundColor: "rgba(212,37,37,1)",
+                                                pointHoverBorderColor: "rgba(212,37,37,1)",
+                                                data: b ,
+                                                hidden:false
+
+                                            },
+                                            {
+                                                label:["Hypertensive Disease"],
+                                                fill: false,
+                                                backgroundColor: "rgba(209,212,37,0.8)",
+                                                borderColor: "rgba(209,212,37,0.8)",
+                                                pointBorderColor: "rgba(209,212,37,0.8)",
+                                                pointBackgroundColor: "rgba(209,212,37,0.8)",
+                                                pointHoverBackgroundColor: "rgba(209,212,37,1)",
+                                                pointHoverBorderColor: "rgba(209,212,37,1)",
+                                                data: c ,
+                                                hidden:false
+
+                                            },{
+                                                label:["Acute Upper Respiratory Tract Infection including Influenza"],
+                                                fill: false,
+                                                backgroundColor: "rgba(37,52,212,0.8)",
+                                                borderColor: "rgba(37,52,212,0.8)",
+                                                pointBorderColor: "rgba(37,52,212,0.8)",
+                                                pointBackgroundColor: "rgba(37,52,212,0.8)",
+                                                pointHoverBackgroundColor: "rgba(37,52,212,1)",
+                                                pointHoverBorderColor: "rgba(37,52,212,1)",
+                                                data: d ,
+                                                hidden:false
+
+                                            },
+                                            {
+                                                label:["Diabetes Mellitus"],
+                                                fill: false,
+                                                backgroundColor: "rgba(212,37,80,0.8)",
+                                                borderColor: "rgba(212,37,80,0.8)",
+                                                pointBorderColor: "rgba(212,37,80,0.8)",
+                                                pointBackgroundColor: "rgba(212,37,80,0.8)",
+                                                pointHoverBackgroundColor: "rgba(212,37,80,1)",
+                                                pointHoverBorderColor: "rgba(212,37,80,1)",
+                                                data: e ,
+                                                hidden:false
+                                            },
+                                        ],
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/front.js"></script>
+</body>
+</html>
