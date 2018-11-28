@@ -3,20 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HCI - Team 15 Bar Chart</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
+    <title>Team 15 - HCI Bar Chart</title>
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/fontastic.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-    <link rel="stylesheet" href="css/grasp_mobile_progress_circle-1.0.0.min.css">
     <link rel="stylesheet" href="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
-    <link rel="stylesheet" href="css/custom.css">
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
 </head>
 <body>
@@ -36,33 +28,22 @@
     </div>
 </nav>
 <div class="page">
+    <header class="header">
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-holder d-flex align-items-center justify-content-between">
+                    <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars" data-toggle="collapse"> </i></a></div>
+                </div>
+            </div>
+        </nav>
+    </header>
     <section class="charts">
         <div class="container-fluid">
             <header>
             </header>
             <div class="row">
                 <div class="col-lg-12">
-                    <canvas id="barChartExample" width="100%" height="60%" ></canvas>
-                    <br>
-                    <a class="button" id="popup1link" href="#modal" data-toggle="modal">
-                        <div id="chart">
-                        </div>
-                        <button>View Air Pollutant Levels</button>
-                    </a>
-                    <div class="modal fade" id="modal" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-body" width="800" height="600">
-                                    <br>
-                                    <label for = "canvas">
-                                        Air Pollutants Level - Micrograms Per Cubic Metre
-                                        <canvas id="canvas" width="480" height="600"></canvas>
-                                    </label>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <canvas id="barChartExample" width=auto></canvas>
                     <script>
                         $(function() {
                             var a = [];
@@ -76,7 +57,7 @@
                             var L = [];
                             var k =[];
                             var data = {
-                                resource_id: 'f8060108-f102-41e2-be12-fe264a34bba4', // the resource id
+                                resource_id: 'f8060108-f102-41e2-be12-fe264a34bba4',
                             };
                             $.ajax({
                                 url: 'https://data.gov.sg/api/action/datastore_search',
@@ -89,7 +70,7 @@
                                 }
                             });
                             var data = {
-                                resource_id: '9c28a8fa-9f14-4985-aadc-cff5a49c496a', // the resource id
+                                resource_id: '9c28a8fa-9f14-4985-aadc-cff5a49c496a',
                             };
                             $.ajax({
                                 url: 'https://data.gov.sg/api/action/datastore_search',
@@ -102,7 +83,7 @@
                                 }
                             });
                             var data = {
-                                resource_id: 'b1f52bb9-6d74-42b6-aae9-60e15a6b725f', // the resource id
+                                resource_id: 'b1f52bb9-6d74-42b6-aae9-60e15a6b725f',
                             };
                             $.ajax({
                                 url: 'https://data.gov.sg/api/action/datastore_search',
@@ -115,7 +96,7 @@
                                 }
                             });
                             var data = {
-                                resource_id: 'd5488c4a-886c-4174-b139-b85718cf162a', // the resource id
+                                resource_id: 'd5488c4a-886c-4174-b139-b85718cf162a',
                             };
                             $.ajax({
                                 url: 'https://data.gov.sg/api/action/datastore_search',
@@ -130,7 +111,7 @@
                                 }
                             });
                             var data = {
-                                resource_id: '1bdc3a3e-27bd-4b5b-b13a-2e36528fb785', // the resource id
+                                resource_id: '1bdc3a3e-27bd-4b5b-b13a-2e36528fb785',
                             };
                             $.ajax({
                                 url: 'https://data.gov.sg/api/action/datastore_search',
@@ -143,7 +124,7 @@
                                 }
                             });
                             var data = {
-                                resource_id: '19dea782-8fe1-40d0-834d-70f780ca86f1', // the resource id
+                                resource_id: '19dea782-8fe1-40d0-834d-70f780ca86f1',
                             };
                             $.ajax({
                                 url: 'https://data.gov.sg/api/action/datastore_search',
@@ -236,68 +217,60 @@
                                                 data: e,
                                                 hidden: false,
                                             },
+                                            {
+                                                label: ["Air Pollutant - MICROGRAMS PER CUBIC METRE"],
+                                                fill: false,
+                                                backgroundColor: "rgba(30,10,221,0.8)",
+                                                borderColor:"rgba(30,10,221,0.8)",
+                                                pointBorderColor: "rgba(30,10,221,0.8)",
+                                                pointBackgroundColor: "rgba(30,10,221,0.8)",
+                                                pointHoverBackgroundColor: "rgba(30,10,221,1)",
+                                                pointHoverBorderColor:"rgba(30,10,221,1)",
+                                                data: k,
+                                                hidden: true,
+                                                type:'line'
+                                            },
+                                            {
+                                                label: ["Nitrogen Dioxide - MICROGRAMS PER CUBIC METRE"],
+                                                fill: false,
+                                                backgroundColor: "rgba(200,90,20,0.8)",
+                                                borderColor: "rgba(200,90,20,0.8)",
+                                                pointBorderColor: "rgba(200,90,20,0.8)",
+                                                pointBackgroundColor: "rgba(200,90,20,0.8)",
+                                                pointHoverBackgroundColor: "rgba(200,90,20,1)",
+                                                pointHoverBorderColor: "rgba(200,90,20,1)",
+                                                data: g,
+                                                hidden: true,
+                                                type:'line'
+                                            },
+                                            {
+                                                label: ["Carbon Monoxide - MICROGRAMS PER CUBIC METRE"],
+                                                fill: false,
+                                                backgroundColor: "rgba(80,50,80,0.8)",
+                                                borderColor:"rgba(80,50,80,0.8)",
+                                                pointBorderColor: "rgba(80,50,80,0.8)",
+                                                pointBackgroundColor: "rgba(80,50,80,0.8)",
+                                                pointHoverBackgroundColor: "rgba(80,50,80,1)",
+                                                pointHoverBorderColor:"rgba(80,50,80,1)",
+                                                data: h,
+                                                hidden: true,
+                                                type:'line'
+                                            },
+                                            {
+                                                label: ["Sulphur Dioxide - MICROGRAMS PER CUBIC METRE"],
+                                                fill: false,
+                                                backgroundColor: "rgba(30,130,130,0.8)",
+                                                borderColor:"rgba(30,130,130,0.8)",
+                                                pointBorderColor: "rgba(30,130,130,0.8)",
+                                                pointBackgroundColor: "rgba(30,130,130,0.8)",
+                                                pointHoverBackgroundColor: "rgba(30,130,130,1)",
+                                                pointHoverBorderColor:"rgba(30,130,130,1)",
+                                                data: j,
+                                                hidden: true,
+                                                type:'line'
+                                            },
                                         ],
                                     }
-                                });
-                                $("#modal").on('shown.bs.modal', function() {
-                                    var BARCHARTEXMPLE = $('#canvas');
-                                    var barChartExample = new Chart(BARCHARTEXMPLE, {
-                                        type:'line',
-                                        data:{
-                                            labels: [2006,2007,2008,2009,2010,2011,2012,2013,20014,2015],
-                                            datasets: [
-                                                {
-                                                    label: "Sulphur Dioxide",
-                                                    fill: false,
-                                                    backgroundColor: "rgba(30,130,130,0.8)",
-                                                    borderColor:"rgba(30,130,130,0.8)",
-                                                    pointBorderColor: "rgba(30,130,130,0.8)",
-                                                    pointBackgroundColor: "rgba(30,130,130,0.8)",
-                                                    pointHoverBackgroundColor: "rgba(30,130,130,1)",
-                                                    pointHoverBorderColor:"rgba(30,130,130,1)",
-                                                    data: j,
-                                                    hidden: false,
-                                                },
-                                                {
-                                                    label: ["Carbon Monoxide"],
-                                                    fill: false,
-                                                    backgroundColor: "rgba(80,50,80,0.8)",
-                                                    borderColor:"rgba(80,50,80,0.8)",
-                                                    pointBorderColor: "rgba(80,50,80,0.8)",
-                                                    pointBackgroundColor: "rgba(80,50,80,0.8)",
-                                                    pointHoverBackgroundColor: "rgba(80,50,80,1)",
-                                                    pointHoverBorderColor:"rgba(80,50,80,1)",
-                                                    data: h,
-                                                    hidden: false,
-                                                },
-                                                {
-                                                    label: ["Nitrogen Dioxide"],
-                                                    fill: false,
-                                                    backgroundColor: "rgba(200,90,20,0.8)",
-                                                    borderColor: "rgba(200,90,20,0.8)",
-                                                    pointBorderColor: "rgba(200,90,20,0.8)",
-                                                    pointBackgroundColor: "rgba(200,90,20,0.8)",
-                                                    pointHoverBackgroundColor: "rgba(200,90,20,1)",
-                                                    pointHoverBorderColor: "rgba(200,90,20,1)",
-                                                    data: g,
-                                                    hidden: false,
-                                                },
-                                                {
-                                                    label: ["Air Pollutant"],
-                                                    fill: false,
-                                                    backgroundColor: "rgba(30,10,221,0.8)",
-                                                    borderColor:"rgba(30,10,221,0.8)",
-                                                    pointBorderColor: "rgba(30,10,221,0.8)",
-                                                    pointBackgroundColor: "rgba(30,10,221,0.8)",
-                                                    pointHoverBackgroundColor: "rgba(30,10,221,1)",
-                                                    pointHoverBorderColor:"rgba(30,10,221,1)",
-                                                    data: k,
-                                                    hidden: true,
-                                                },
-
-                                            ]
-                                        },
-                                    });
                                 });
                             });
                         });
@@ -308,10 +281,7 @@
     </section>
 </div>
 <script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/popper.js/umd/popper.min.js"> </script>
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
-<script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
 <script src="vendor/chart.js/Chart.min.js"></script>
 <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="js/front.js"></script>
